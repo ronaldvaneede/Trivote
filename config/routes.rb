@@ -1,5 +1,10 @@
 Trivote::Application.routes.draw do
-  resources :items
+  resources :items do
+    member do
+      post :vote_up
+      post :vote_down
+    end
+  end
 
   devise_for :users
 

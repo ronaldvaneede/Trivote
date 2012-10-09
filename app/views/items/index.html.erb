@@ -15,11 +15,8 @@
       <tr>
         <td><%= link_to item.name, item.url %></td>
         <td><%= item.user.email %></td>
-        <td>0</td>
-        <td>
-          <button class="btn btn-mini btn-success" type="button"><i class="icon-arrow-up"></i></button>
-          <button class="btn btn-mini btn-danger" type="button"><i class="icon-arrow-down"></i></button>
-        </td>
+        <td><%= item.plusminus %></td>
+        <td><%= button_to('+1', vote_up_item_path(item), :class => "btn btn-mini btn-success", :form_class => "form-inline") %> <%= button_to('-1', vote_down_item_path(item), :class => "btn btn-mini btn-danger", :form_class => "form-inline") %></td>
         <td><%= link_to 'Show', item %> <%= link_to 'Edit', edit_item_path(item) %> <%= link_to 'Destroy', item, confirm: 'Are you sure?', method: :delete %></td>
       </tr>
   <% end %>

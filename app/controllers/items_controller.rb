@@ -1,5 +1,7 @@
 
 class ItemsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /items
   # GET /items.json
   def index
@@ -80,6 +82,24 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url }
       format.json { head :no_content }
+    end
+  end
+
+  def vote_up
+    begin
+      current_user.vote_for(@item = Item.find(params[:id]))
+      redirect_to items_url
+    rescue ActiveRecord::RecordInvalid
+      redirect_to items_url
+    end
+  end
+
+  def vote_down
+    begin
+      current_user.vote_against(@item = Item.find(params[:id]))
+      redirect_to items_url
+    rescue ActiveRecord::RecordInvalid
+      redirect_to items_url
     end
   end
 end
