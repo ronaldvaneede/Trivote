@@ -47,7 +47,7 @@
           <a class="brand" href="/">Trivote</a>
           <% if user_signed_in? %>
             <ul class="nav">
-              <li><%= link_to "Sign out", destroy_user_session_path %></li>
+              <li><%= link_to "Signed in as #{current_user.email}, Sign out", destroy_user_session_path %></li>
             </ul>
           <% else %>
             <ul class="nav">
