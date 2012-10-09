@@ -19,6 +19,9 @@ gem "thumbs_up", "~> 0.6.2"
 # Authentication
 gem "devise", "~> 2.1.2"
 
+# Static pages
+gem "high_voltage"
+
 group :development do
   gem "therubyracer", "~> 0.10.2"
 end
