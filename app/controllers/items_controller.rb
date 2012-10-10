@@ -48,6 +48,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
+        Statsd.increment("trivote.#{Rails.env}.items.create")
         format.html { redirect_to items_url, notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
       else
@@ -88,6 +89,7 @@ class ItemsController < ApplicationController
   def vote_up
     begin
       current_user.vote_for(@item = Item.find(params[:id]))
+      Statsd.increment("trivote.#{Rails.env}.votes.upvote")
       redirect_to items_url
     rescue ActiveRecord::RecordInvalid
       redirect_to items_url
@@ -97,6 +99,7 @@ class ItemsController < ApplicationController
   def vote_down
     begin
       current_user.vote_against(@item = Item.find(params[:id]))
+      Statsd.increment("trivote.#{Rails.env}.votes.downvote")
       redirect_to items_url
     rescue ActiveRecord::RecordInvalid
       redirect_to items_url

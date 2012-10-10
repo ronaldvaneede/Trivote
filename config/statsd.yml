@@ -1,0 +1,6 @@
+production:
+   host: s001.ronaldvaneede.com
+   port: 8125
+development:
+   host: s001.ronaldvaneede.com
+   port: 8125
