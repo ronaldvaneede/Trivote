@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+.form-vote {
+    margin: 0 0;
+    width: 100%;
+}
