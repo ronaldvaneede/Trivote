@@ -6,6 +6,7 @@ gem 'rails', '3.2.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem "mysql", "~> 2.8.1"
 
 # Theming
 gem "twitter-bootstrap-rails", "~> 2.1.3"

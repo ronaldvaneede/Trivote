@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.tally
+    @items = Item.plusminus_tally
 
     respond_to do |format|
       format.html # index.html.erb
