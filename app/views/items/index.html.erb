@@ -4,6 +4,7 @@
   <thead>
   <tr>
     <th>Title</th>
+    <th>Description</th>
     <th>Added by</th>
     <th colspan="3">Votes</th>
   </tr>
@@ -13,6 +14,7 @@
   <% @items.each do |item| %>
       <tr>
         <td><%= link_to item.name, item.url, :target => "_blank" %></td>
+        <td><%= item.description %></td>
         <td><%= item.user.email %></td>
         <td><%= item.plusminus %></td>
         <% unless current_user.voted_on?(item) %>
