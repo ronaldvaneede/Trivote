@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<div class="well">
+  <h4><%= @itemgroup.name %></h4>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Added by</th>
+      <th>Ranking</th>
+      <th>Votes</th>
+      <th colspan="2"></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item.url, :target => "_blank" %></td>
+          <td><%= item.description %></td>
+          <td><%= item.user.email %></td>
+          <td><%= item.plusminus %></td>
+          <td><%= item.votes_count %></td>
+          <% unless current_user.voted_on?(item) %>
+              <td style="width: 25px;">
+                <%= button_to('+1', vote_up_itemgroup_item_path(@itemgroup, item), :class => "btn btn-mini btn-success", :form_class => "form-inline form-vote") %>
+              </td>
+              <td style="width: 25px;">
+                <%= button_to('-1', vote_down_itemgroup_item_path(@itemgroup, item), :class => "btn btn-mini btn-danger", :form_class => "form-inline form-vote") %>
+              </td>
+          <% else %>
+              <td style="width: 25px;"></td>
+              <td style="width: 25px;"></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+
+<%= link_to 'New Item', new_itemgroup_item_path(@itemgroup) %>

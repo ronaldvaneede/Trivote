@@ -1,4 +1,4 @@
-<%= form_for(@item) do |f| %>
+<%= form_for [@itemgroup, @item] do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -22,6 +22,10 @@
   <div class="field">
     <%= f.label :url %>
     <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :itemgroup_id, "Group" %>
+    <%= f.select "itemgroup_id", Itemgroup.all.collect{|t|[t.name,t.id]}, :selected => params[:itemgroup_id] %>
   </div>
   <!-- <div class="field">
     <%= f.label :archived %>

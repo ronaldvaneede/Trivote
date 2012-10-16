@@ -27,6 +27,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.json
   def new
+    @itemgroup = Itemgroup.find(params[:itemgroup_id])
     @item = Item.new
 
     respond_to do |format|
@@ -37,6 +38,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    @itemgroup = Itemgroup.find(params[:itemgroup_id])
     @item = Item.find(params[:id])
   end
 
@@ -49,7 +51,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         Statsd.increment("trivote.#{Rails.env}.items.create")
-        format.html { redirect_to items_url, notice: 'Item was successfully created.' }
+        format.html { redirect_to itemgroup_url(@item.itemgroup_id), notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
       else
         format.html { render action: "new" }
@@ -90,9 +92,9 @@ class ItemsController < ApplicationController
     begin
       current_user.vote_for(@item = Item.find(params[:id]))
       Statsd.increment("trivote.#{Rails.env}.votes.upvote")
-      redirect_to items_url
+      redirect_to itemgroup_url(params[:itemgroup_id])
     rescue ActiveRecord::RecordInvalid
-      redirect_to items_url
+      redirect_to itemgroup_url(params[:itemgroup_id])
     end
   end
 
@@ -100,9 +102,9 @@ class ItemsController < ApplicationController
     begin
       current_user.vote_against(@item = Item.find(params[:id]))
       Statsd.increment("trivote.#{Rails.env}.votes.downvote")
-      redirect_to items_url
+      redirect_to itemgroup_url(params[:itemgroup_id])
     rescue ActiveRecord::RecordInvalid
-      redirect_to items_url
+      redirect_to itemgroup_url(params[:itemgroup_id])
     end
   end
 end

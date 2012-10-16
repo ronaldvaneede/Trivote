@@ -1,8 +1,10 @@
 Trivote::Application.routes.draw do
-  resources :items do
-    member do
-      post :vote_up
-      post :vote_down
+  resources :itemgroups do
+    resources :items do
+      member do
+        post :vote_up
+        post :vote_down
+      end
     end
   end
 
@@ -60,7 +62,7 @@ Trivote::Application.routes.draw do
   #root :to => 'pages#home'
 
   authenticated :user do
-    root to: 'items#index'
+    root to: 'itemgroups#index'
   end
   root :to => 'high_voltage/pages#show', :id => 'home'
 
