@@ -5,4 +5,6 @@ class Item < ActiveRecord::Base
   attr_accessible :archived, :name, :url, :description, :itemgroup_id
 
   acts_as_voteable
+
+  validates :name, :presence => true
 end

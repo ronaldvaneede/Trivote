@@ -17,7 +17,7 @@
 
     <% @items.each do |item| %>
         <tr>
-          <td><%= link_to item.name, item.url, :target => "_blank" %></td>
+          <td><%= link_to_unless item.url.empty?, item.name, item.url, :target => "_blank" %></td>
           <td><%= item.description %></td>
           <td><%= item.user.email %></td>
           <td><%= item.plusminus %></td>

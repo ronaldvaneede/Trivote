@@ -45,6 +45,7 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
+    @itemgroup = Itemgroup.find(params[:itemgroup_id])
     @item = Item.new(params[:item])
     @item.user = current_user
 
